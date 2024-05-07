@@ -17,11 +17,33 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+// salt and hash password before it is saved to the db
 userSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt();
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
+
+// static method to login user
+userSchema.statics.login = async function (email, password) {
+  if (!email || !password) {
+    throw Error("Email and Password are required.");
+  }
+
+  const user = await this.findOne({ email });
+
+  if (!user) {
+    throw Error("Invalid login credentials.");
+  }
+
+  const match = await bcrypt.compare(password, user.password);
+
+  if (!match) {
+    throw Error("Invalid login credentials.");
+  }
+
+  return user;
+};
 
 const User = mongoose.model("user", userSchema);
 

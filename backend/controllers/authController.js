@@ -1,4 +1,10 @@
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
+
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "3d" });
+};
 
 // handle errors
 const handleErrors = (error) => {
@@ -25,14 +31,28 @@ module.exports.signup_post = async (req, res) => {
 
   try {
     const user = await User.create({ email, password });
-    res.status(201).json(user);
+
+    // create a JWT token
+    const token = createToken(user._id);
+
+    res.status(201).json({ email, token });
   } catch (error) {
     const errors = handleErrors(error);
     res.status(400).json({ errors });
   }
 };
 
-module.exports.login_post = (req, res) => {
-  console.log(req.body);
-  res.send("user login");
+module.exports.login_post = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.login(email, password);
+
+    // create a JWT token
+    const token = createToken(user._id);
+
+    res.status(200).json({ email, token });
+  } catch (error) {
+    res.status(400).json({ error });
+  }
 };
