@@ -2,7 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
+const authRoutes = require("./routes/authRoutes");
+
 const app = express();
+
+// middleware
+app.use(express.json());
 
 // database connection
 mongoose
@@ -15,3 +20,4 @@ mongoose
   .catch((err) => console.log(err));
 
 // routes
+app.use(authRoutes);
