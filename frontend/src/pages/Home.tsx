@@ -1,7 +1,7 @@
 import React from "react";
 
 const Home = () => {
-  return <h1>Crypto Trader</h1>;
+  return <></>;
 };
 
 export default Home;

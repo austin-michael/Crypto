@@ -12,7 +12,7 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <Link className="navbar-home-link" to="/">
-        Home
+        Crypto
       </Link>
       <ul className="navbar-sub-links">
         {!user ? (
@@ -25,7 +25,9 @@ const NavBar = () => {
             </li>
           </>
         ) : (
-          <button onClick={() => logOut()}>Logout</button>
+          <button className="logout" onClick={() => logOut()}>
+            Logout
+          </button>
         )}
       </ul>
     </nav>

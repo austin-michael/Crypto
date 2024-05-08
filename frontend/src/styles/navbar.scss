@@ -2,15 +2,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 1.6rem;
+  height: 64px;
+  padding: 0 48px;
 
-  a {
-    text-decoration: none;
-    color: black;
+  .navbar-home-link {
+    font-size: 2.4rem;
   }
 
   .navbar-sub-links {
     display: flex;
-    gap: 8px;
+    gap: 16px;
     list-style: none;
+  }
+
+  .logout {
+    background: none;
+    border: none;
+    color: #eeeeee;
+    cursor: pointer;
   }
 }
