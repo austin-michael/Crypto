@@ -1,0 +1,16 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  .navbar-sub-links {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+  }
+}
