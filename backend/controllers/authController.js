@@ -56,3 +56,7 @@ module.exports.login_post = async (req, res) => {
     res.status(400).json({ error });
   }
 };
+
+module.exports.dummy_error = (req, res) => {
+  res.status(500).json({ error: "This is a dummy error" });
+};
